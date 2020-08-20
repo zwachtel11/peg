@@ -10,15 +10,18 @@ BUILD_DATE ?= $(shell date -u +%m/%d/%Y)
 export GO111MODULE=on
 
 PEG=bin/peg
+PEG_DAR=bin/peg-darwin
 
 PKG := 
 
-all: format peg
+all: format peg pegdar
 
 clean:
 	rm -rf ${PEG} 
+pegdar:
+	GOARCH=amd64 GOOS=darwin $(GOBUILD) -ldflags "-X main.version=$(TAG) -X main.commit=$(COMMIT) -X main.date=$(BUILD_DATE)" -o ${PEG_DAR} github.com/zwachtel11/peg 
 peg:
-	GOARCH=amd64 GOOS=darwin $(GOBUILD) -ldflags "-X main.version=$(TAG) -X main.commit=$(COMMIT) -X main.date=$(BUILD_DATE)" -o ${PEG} github.com/zwachtel11/peg 
+	GOARCH=amd64 GOOS=linux $(GOBUILD) -ldflags "-X main.version=$(TAG) -X main.commit=$(COMMIT) -X main.date=$(BUILD_DATE)" -o ${PEG} github.com/zwachtel11/peg 
 
 .PHONY: vendor
 vendor:

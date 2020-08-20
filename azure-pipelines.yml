@@ -1,0 +1,29 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest'
+
+variables:
+  GO111MODULE: 'on'
+
+steps:
+- task: GoTool@0
+  inputs:
+    version: '1.14'
+
+- script: |
+    make
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  displayName: 'Build'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(System.DefaultWorkingDirectory)/bin'
+    ArtifactName: 'peg'
+    publishLocation: 'Container'
