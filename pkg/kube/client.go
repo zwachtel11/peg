@@ -131,6 +131,7 @@ func (c *Client) createObj(obj unstructured.Unstructured) error {
 		Namespace: obj.GetNamespace(),
 		Name:      obj.GetName(),
 	}
+
 	ctx := context.Background()
 	if err := kc.Get(ctx, key, currentR); err != nil {
 		if !apierrors.IsNotFound(err) {

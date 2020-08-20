@@ -16,12 +16,18 @@ limitations under the License.
 package cmd
 
 import (
+	"context"
+	"fmt"
+
 	"github.com/spf13/cobra"
+	"github.com/zwachtel11/peg/pkg/peg"
 )
 
 type deployOptions struct {
 	manifest   string
 	kubeconfig string
+	username   string
+	password   string
 }
 
 var deployOpts = &deployOptions{}
@@ -46,5 +52,13 @@ func init() {
 }
 
 func runDeploy() error {
+
+	resolver := newResolver(deployOpts.username, deployOpts.password)
+	ctx := context.Background()
+
+	err := peg.Deploy(ctx, resolver, deployOpts.manifest, deployOpts.kubeconfig)
+	if err != nil {
+		fmt.Printf("err: %s", err)
+	}
 	return nil
 }

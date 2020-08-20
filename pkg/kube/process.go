@@ -7,14 +7,62 @@ import (
 	"time"
 
 	"github.com/pkg/errors"
-	"gopkg.in/yaml.v2"
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
 	"k8s.io/apimachinery/pkg/util/wait"
 	apiyaml "k8s.io/apimachinery/pkg/util/yaml"
+	"sigs.k8s.io/yaml"
 )
 
+const namespaceKind = "Namespace"
+
 func PrepareManifest(bytes []byte) ([]unstructured.Unstructured, error) {
-	return ToUnstructured(bytes)
+	unstruct, err := ToUnstructured(bytes)
+	if err != nil {
+		return nil, err
+	}
+	return fixTargetNamespace(unstruct, "default"), nil
+}
+
+// fixTargetNamespace ensures all the provider components are deployed in the target namespace (apply only to namespaced objects).
+func fixTargetNamespace(objs []unstructured.Unstructured, targetNamespace string) []unstructured.Unstructured {
+	for _, o := range objs {
+		// if the object has Kind Namespace, fix the namespace name
+		if o.GetKind() == namespaceKind {
+			o.SetName(targetNamespace)
+		}
+
+		// if the object is namespaced, set the namespace name
+		if IsResourceNamespaced(o.GetKind()) {
+			o.SetNamespace(targetNamespace)
+		}
+	}
+
+	return objs
+}
+
+// IsResourceNamespaced returns true if the resource kind is namespaced.
+func IsResourceNamespaced(kind string) bool {
+	switch kind {
+	case "Namespace",
+		"Node",
+		"PersistentVolume",
+		"PodSecurityPolicy",
+		"CertificateSigningRequest",
+		"ClusterRoleBinding",
+		"ClusterRole",
+		"VolumeAttachment",
+		"StorageClass",
+		"CSIDriver",
+		"CSINode",
+		"ValidatingWebhookConfiguration",
+		"MutatingWebhookConfiguration",
+		"CustomResourceDefinition",
+		"PriorityClass",
+		"RuntimeClass":
+		return false
+	default:
+		return true
+	}
 }
 
 // ToUnstructured takes a YAML and converts it to a list of Unstructured objects
@@ -38,9 +86,8 @@ func ToUnstructured(rawyaml []byte) ([]unstructured.Unstructured, error) {
 
 		var m map[string]interface{}
 		if err := yaml.Unmarshal(b, &m); err != nil {
-			return nil, errors.Wrapf(err, "failed to unmarshal the %s yaml document: %q", count, string(b))
+			return nil, errors.Wrapf(err, "failed to unmarshal the yaml document")
 		}
-
 		var u unstructured.Unstructured
 		u.SetUnstructuredContent(m)
 
@@ -85,7 +132,7 @@ func newWriteBackoff() wait.Backoff {
 	return wait.Backoff{
 		Duration: 500 * time.Millisecond,
 		Factor:   1.5,
-		Steps:    10,
+		Steps:    5,
 		Jitter:   0.4,
 	}
 }
