@@ -1,4 +1,4 @@
-# peg, the minimalist kubernetes package manager
+# peg
 Kubernetes is hard ... helm makes it harder. Try peg for to "peg" up a seemless Kubernetes experience.
 
 peg is a oras based storage for kubernetes manifests. a minimalist package manager geared at helping the deployment story for private container registries.
@@ -76,7 +76,7 @@ spec:
 
 Instead of copy and pasting this config from machine to machine or cloning git repos you decide to use peg to seemlessly push and pull your kubernetes manifests.
 
-First use peg to login into your private OCI compliant container registry
+First use peg to login into your private OCI compliant container registry.
 
 ```sh
 peg login pegimages.azurecr.io -u <CR_USERNAME> -p <CR_PASSWORD>
