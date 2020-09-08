@@ -88,13 +88,13 @@ Once you are authenticated, you are ready to push manifests into the registry.
 peg push --file pods/config/redis-pod.yaml --manifest pegimages.azurecr.io/myteam-redis:latest
 ```
 
-For here on your production machines you should be able to pull your config just as you expect for a docker image.
+For here, you should be able to pull your config just as you expect for a docker image.
 
 ```sh
 peg pull --manifest pegimages.azurecr.io/myteam-redis:latest --outfile myteam-redis.yaml
 ```
 
-Or if you already know the config is good to go, cut out the middle step and use peg to deploy your application straight to your cluster.
+Or if you already know the config is ready for deployment, cut out the middle step and use peg to deploy your application straight to your cluster.
 
 ```sh
 peg deploy --manifest pegimages.azurecr.io/myteam-redis:latest --kubeconfig=kubeconfig
