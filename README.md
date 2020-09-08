@@ -7,30 +7,29 @@ With peg a user can seemlessly push their kubernetes application manifest into a
 
 ## install cli
 
-* Install from the latest [release artifacts](https://github.com/zwachtel11/peg/releases):
+Install from the latest [release artifacts](https://github.com/zwachtel11/peg/releases):
 
-  * Linux
+* Linux
 
-    ```sh
-    curl -LO https://github.com/zwachtel11/peg/releases/download/v0.0.1/peg
-    mv peg /usr/local/bin/
-    ```
+  ```sh
+  curl -LO https://github.com/zwachtel11/peg/releases/download/v0.0.1/peg
+  mv peg /usr/local/bin/
+  ```
 
-  * macOS
+* macOS
 
-    ```sh
-    curl -LO https://github.com/zwachtel11/peg/releases/download/v0.0.1/peg-darwin
-    mv peg-darwin /usr/local/bin/peg
-    ```
+  ```sh
+  curl -LO https://github.com/zwachtel11/peg/releases/download/v0.0.1/peg-darwin
+  mv peg-darwin /usr/local/bin/peg
+  ```
 
-  * Windows
+* Windows
 
-    Add `%USERPROFILE%\bin\` to your `PATH` environment variable so that `peg.exe` can be found.
-
-    ```sh
-    curl.exe -sLO  https://github.com/zwachtel11/peg/releases/download/v0.0.1/peg.exe
-    copy peg.exe %USERPROFILE%\bin\
-    set PATH=%USERPROFILE%\bin\;%PATH%
+  Add `%USERPROFILE%\bin\` to your `PATH` environment variable so that `peg.exe` can be found.
+  ```sh
+  curl.exe -sLO  https://github.com/zwachtel11/peg/releases/download/v0.0.1/peg.exe
+  copy peg.exe %USERPROFILE%\bin\
+  set PATH=%USERPROFILE%\bin\;%PATH%
 
 
 ## usage
