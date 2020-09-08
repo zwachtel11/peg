@@ -1,9 +1,9 @@
 # peg
-Kubernetes is hard ... helm makes it harder. Try peg for to "peg" up a seemless Kubernetes experience.
+Kubernetes is hard ... helm makes it harder. Try peg for to "peg" up a seamless Kubernetes experience.
 
 peg is a oras based storage for kubernetes manifests. a minimalist package manager geared at helping the deployment story for private container registries.
 
-With peg a user can seemlessly push their kubernetes application manifest into a OCI compliant container registry. Then when they need to deploy their appliacations, they can pull down their manifests or seemlessly deploy their applications to the target kubernetes cluster.
+With peg a user can seamlessly push their kubernetes application manifest into a OCI compliant container registry. Then when they need to deploy their applications, they can pull down their manifests or seamlessly deploy their applications to the target kubernetes cluster.
 
 ## install cli
 
@@ -74,7 +74,7 @@ spec:
           path: redis.conf
 ```
 
-Instead of copy and pasting this config from machine to machine or cloning git repos you decide to use peg to seemlessly push and pull your kubernetes manifests.
+Instead of copy and pasting this config from machine to machine or cloning git repos you decide to use peg to seamlessly push and pull your kubernetes manifests.
 
 First use peg to login into your private OCI compliant container registry.
 
