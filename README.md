@@ -106,7 +106,7 @@ Or if your kubeconfig is already set in `~/.kube/config`
 peg deploy --manifest pegimages.azurecr.io/myteam-redis:latest
 ```
 
-## Roadmap
+## roadmap
 
 * Docker Secrets embedded in the deployment yamls for seamless private container pull.
 * "pegify" the helm chart experience with a simple push & pull flow for helm charts.
