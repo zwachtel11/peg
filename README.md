@@ -3,7 +3,7 @@ Kubernetes is hard ... helm makes it harder. Try peg for to "peg" up a seamless 
 
 peg is a oras based storage for kubernetes manifests. a minimalist package manager geared at helping the deployment story for private container registries.
 
-With peg a user can seamlessly push their kubernetes application manifest into a OCI compliant container registry. Then when they need to deploy their applications, they can pull down their manifests or seamlessly deploy their applications to the target kubernetes cluster.
+With peg a user can seamlessly push their kubernetes application manifest into a OCI compliant container registry. When they need to deploy their applications, they can pull down their manifests or seamlessly deploy their applications to the target kubernetes cluster.
 
 ## install cli
 
